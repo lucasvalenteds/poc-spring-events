@@ -47,7 +47,7 @@ class ApplicationTests {
 
     @Test
     @Order(2)
-    void rollbackCustomerCreationDueToHandlerError() {
+    void rollbackCustomerCreationWhenHandlerThrowsException() {
         assertThrows(AccountNotFoundException.class, () -> accountService.findById(2L));
         assertThrows(CustomerNotFoundException.class, () -> customerService.findById(2L));
 
