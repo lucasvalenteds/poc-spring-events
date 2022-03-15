@@ -14,7 +14,7 @@ public class AccountService {
     }
 
     @Transactional
-    public Long createCustomerAccount(Customer customer) {
+    public Long create(Customer customer) {
         final var account = new Account();
         account.setCustomerId(customer.getId());
 

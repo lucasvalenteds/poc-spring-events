@@ -30,7 +30,7 @@ public class CustomerCreatedHandler {
         final var customer = customerService.findById(event.customerId());
         final var customerId = customer.getId();
 
-        final var accountId = accountService.createCustomerAccount(customer);
+        final var accountId = accountService.create(customer);
         LOGGER.info("Account {} created for customer {}", accountId, customerId);
 
         customerService.activate(customerId);
