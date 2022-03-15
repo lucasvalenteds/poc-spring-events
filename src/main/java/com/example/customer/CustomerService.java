@@ -17,7 +17,7 @@ public class CustomerService {
     }
 
     @Transactional
-    public Customer createCustomer(String name) {
+    public Customer create(String name) {
         final var customer = new Customer();
         customer.setName(name);
         customer.setActive(false);

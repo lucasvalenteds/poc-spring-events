@@ -33,7 +33,7 @@ class ApplicationTests {
         assertThrows(AccountNotFoundException.class, () -> accountService.findById(1L));
         assertThrows(CustomerNotFoundException.class, () -> customerService.findById(1L));
 
-        final var customer = customerService.createCustomer("John Smith");
+        final var customer = customerService.create("John Smith");
         assertEquals(1L, customer.getId());
         assertEquals("John Smith", customer.getName());
         assertFalse(customer.isActive(), "New customers should be inactive by default");
@@ -53,7 +53,7 @@ class ApplicationTests {
 
         final var exception = assertThrows(
             IllegalArgumentException.class,
-            () -> customerService.createCustomer("Mary Jane")
+            () -> customerService.create("Mary Jane")
         );
 
         assertEquals("Only one customer should be created in this POC", exception.getMessage());
