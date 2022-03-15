@@ -31,7 +31,7 @@ public class CustomerService {
     @Transactional(readOnly = true)
     public Customer findById(Long customerId) {
         return customerRepository.findById(customerId)
-            .orElseThrow(() -> new CustomerNotFoundException("Customer not found with ID " + customerId));
+            .orElseThrow(() -> new CustomerNotFoundException(customerId));
     }
 
     @Transactional
