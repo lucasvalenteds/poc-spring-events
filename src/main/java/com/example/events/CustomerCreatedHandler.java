@@ -23,11 +23,11 @@ public class CustomerCreatedHandler {
 
     @TransactionalEventListener(phase = TransactionPhase.BEFORE_COMMIT)
     public void on(CustomerCreated event) {
-        if (event.getCustomerId() == 2L) {
+        if (event.customerId() == 2L) {
             throw new IllegalArgumentException("Only one customer should be created in this POC");
         }
 
-        final var customer = customerService.findById(event.getCustomerId());
+        final var customer = customerService.findById(event.customerId());
         final var customerId = customer.getId();
 
         final var accountId = accountService.createCustomerAccount(customer);
