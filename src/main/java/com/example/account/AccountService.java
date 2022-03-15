@@ -4,8 +4,6 @@ import com.example.customer.Customer;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Optional;
-
 @Service
 public class AccountService {
 
@@ -26,7 +24,8 @@ public class AccountService {
     }
 
     @Transactional(readOnly = true)
-    public Optional<Account> findById(Long accountId) {
-        return accountRepository.findById(accountId);
+    public Account findById(Long accountId) {
+        return accountRepository.findById(accountId)
+            .orElseThrow(() -> new AccountNotFoundException(accountId));
     }
 }
