@@ -2,12 +2,16 @@ package com.example.events;
 
 import com.example.account.AccountService;
 import com.example.customer.CustomerService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.event.TransactionPhase;
 import org.springframework.transaction.event.TransactionalEventListener;
 
 @Component
 public class CustomerCreatedHandler {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(CustomerCreatedHandler.class);
 
     private final AccountService accountService;
     private final CustomerService customerService;
@@ -24,9 +28,12 @@ public class CustomerCreatedHandler {
         }
 
         final var customer = customerService.findById(event.getCustomerId());
+        final var customerId = customer.getId();
 
-        accountService.createCustomerAccount(customer);
+        final var accountId = accountService.createCustomerAccount(customer);
+        LOGGER.info("Account {} created for customer {}", accountId, customerId);
 
-        customerService.activate(customer.getId());
+        customerService.activate(customerId);
+        LOGGER.info("Customer {} activated", customerId);
     }
 }
