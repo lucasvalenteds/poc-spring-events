@@ -23,7 +23,7 @@ public class CustomerCreatedHandler {
 
     @TransactionalEventListener(phase = TransactionPhase.BEFORE_COMMIT)
     public void on(CustomerCreated event) {
-        if (event.customerId() == 2L) {
+        if (event.customerId() > 1L) {
             throw new IllegalArgumentException("Only one customer should be created in this POC");
         }
 
